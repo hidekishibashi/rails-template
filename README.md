@@ -1,24 +1,36 @@
-# README
+# Ruby on Rails チュートリアル用リポジトリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Ruby on Railsチュートリアルやる
+- 目的：Rails（Ruby含む）知識の穴埋め
+- [第6版](https://railstutorial.jp/chapters/beginning?version=6.0)しか出てない（2022.10.25現在）からそれで進める
+- Rails7はリリースされているのでそれ使う（ついでにRuby3.1.2）
+- Version差異などは吸収しながらよしなに進める
+- Herokuデプロイなどあるっぽいが、そこは目的から外れるのでSKIP予定
 
-Things you may want to cover:
+## Versions
 
-* Ruby version
+| name  | version |
+|:------|:-------:|
+| Ruby  | 3.1.2   |
+| Rails | 7.0.4   | 
+| mysql | 8.0.21  |
 
-* System dependencies
+## How to Start
 
-* Configuration
+#### Build Docker
 
-* Database creation
+```
+docker compose build
+```
 
-* Database initialization
+#### Create Database
 
-* How to run the test suite
+```
+docker compose rub web rails db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Start Rails Application
 
-* Deployment instructions
-
-* ...
+```
+docker compose up
+```
