@@ -18,5 +18,5 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Rub Rubocop
+      - name: Run Rubocop
         run: bundle exec rubocop
