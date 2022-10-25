@@ -34,3 +34,12 @@ docker compose rub web rails db:create
 ```
 docker compose up
 ```
+
+## References
+#### Rubocop
+- [Rubocop](https://github.com/rubocop/rubocop)
+- [Rubocop Rails](https://github.com/rubocop/rubocop-rails)
+- [Rubocop RSpec](https://github.com/rubocop/rubocop-rspec)
+- [Rubocop Performance](https://github.com/rubocop/rubocop-performance)
+
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop) [![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide)
