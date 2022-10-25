@@ -1,16 +1,16 @@
 FROM ruby:3.1.2
 
-RUN mkdir /tutorial
-WORKDIR /tutorial
-COPY Gemfile /tutorial/Gemfile
-COPY Gemfile.lock /tutorial/Gemfile.lock
+RUN mkdir /template
+WORKDIR /template
+COPY Gemfile /template/Gemfile
+COPY Gemfile.lock /template/Gemfile.lock
 
 # Bundlerの不具合対策(1)
 RUN gem update --system
 RUN bundle update --bundler
 
 RUN bundle install
-COPY . /tutorial
+COPY . /template
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
