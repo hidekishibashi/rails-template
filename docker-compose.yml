@@ -24,6 +24,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    #TODO: Ruby3.1で導入された`debug`にも必要な設定なのかな？確認する
+    tty: true
+    stdin_open: true
 
 volumes:
   db-data:
