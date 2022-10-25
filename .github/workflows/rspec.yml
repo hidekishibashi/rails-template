@@ -1,0 +1,53 @@
+name: RSpec
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: rspec
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: mysql:8.0.21
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: tutorial_test
+          MYSQL_ROOT_HOST: '%'
+          TZ: "Asia/Tokyo"
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+
+      - name: Run bundle install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Setup Database
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: tutorial_test
+          MYSQL_ROOT_HOST: '%'
+          TZ: "Asia/Tokyo"
+        run: bin/rails db:create db:schema:load
+
+      - name: Build and test with rspec
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: tutorial_test
+          MYSQL_ROOT_HOST: '%'
+          TZ: "Asia/Tokyo"
+        run: bundle exec rspec
