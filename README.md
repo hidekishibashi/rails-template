@@ -19,7 +19,7 @@ docker compose build
 #### Create Database
 
 ```
-docker compose rub web rails db:create
+docker compose run web rails db:create
 ```
 
 #### Start Rails Application
