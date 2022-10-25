@@ -13,9 +13,7 @@ jobs:
       postgres:
         image: mysql:8.0.21
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: tutorial_test
-          MYSQL_ROOT_HOST: '%'
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           TZ: "Asia/Tokyo"
         ports:
           - 3306:3306
@@ -36,17 +34,10 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       - name: Setup Database
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: tutorial_test
-          MYSQL_ROOT_HOST: '%'
-          TZ: "Asia/Tokyo"
-        run: bin/rails db:create db:schema:load
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Build and test with rspec
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: tutorial_test
-          MYSQL_ROOT_HOST: '%'
-          TZ: "Asia/Tokyo"
         run: bundle exec rspec
