@@ -19,7 +19,7 @@ default: &default
 
 development:
   <<: *default
-  database: tutorial_development
+  database: template_development
   host: db
   username: root
   password: password
@@ -29,7 +29,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: tutorial_test
+  database: template_test
   host: db
   username: root
   password: password
@@ -56,6 +56,6 @@ test:
 #
 production:
   <<: *default
-  database: tutorial_production
-  username: tutorial
+  database: template_production
+  username: template
   password: <%= ENV["TUTORIAL_DATABASE_PASSWORD"] %>
